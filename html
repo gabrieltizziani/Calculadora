@@ -3,6 +3,20 @@
       <h1>{{resultado}}</h1>
       <ion-row>
         <ion-col>
+          <button class="glow-on-hover" color="dark" (click)="operadores('²')">x²</button>
+        </ion-col>
+        <ion-col>
+          <button class="glow-on-hover" color="dark" (click)="operadores('√')">√</button>
+        </ion-col>
+        <ion-col>
+          <button class="glow-on-hover" color="dark" (click)="operadores('%')">%</button>
+        </ion-col>
+        <ion-col>
+          <button class="glow-on-hover" color="dark" (click)="operadores('/')">/</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
           <button class="glow-on-hover" color="dark"  (click)="digitos('7')">7</button>
         </ion-col>
         <ion-col>
@@ -42,7 +56,7 @@
           <button class="glow-on-hover" color="dark" (click)="digitos('3')">3</button>
         </ion-col>
         <ion-col>
-          <button class="glow-on-hover" color="dark" (click)="operadores('*')">*</button>
+          <button class="glow-on-hover" color="dark" (click)="operadores('*')">x</button>
         </ion-col>
       </ion-row>
   
@@ -51,23 +65,18 @@
           <button class="glow-on-hover" color="dark" (click)="digitos('0')">0</button>
         </ion-col>
         <ion-col>
-          <button class="glow-on-hover" color="warning" (click)="resetar()">C</button>
+          <ion-button class="glow-on-hover" color="warning" (click)="resetar()">C</ion-button>
         </ion-col>
         <ion-col>
-          <button class="glow-on-hover" color="dark" (click)="calcular()">=</button>
+          <button  class="glow-on-hover" color="dark"  (click)="operadores('.')">.</button>
         </ion-col>
         <ion-col>
-          <button class="glow-on-hover" color="dark" (click)="operadores('/')">/</button>
+          <button  class="glow-on-hover" color="dark"  (click)="calcular()">=</button>
         </ion-col>
+          
+      
       </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <button class="glow-on-hover" color="dark" (click)="operadores('²')">x²</button>
-        </ion-col>
-        <ion-col>
-          <button class="glow-on-hover" color="dark" (click)="operadores('/')">√</button>
-        </ion-col>
-      </ion-row>
+      
     </ion-grid>
   </ion-content>
