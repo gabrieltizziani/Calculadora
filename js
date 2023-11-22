@@ -84,6 +84,17 @@ export class HomePage {
       this.resultado = (parseInt(this.primeiro_elemento) * parseInt(this.primeiro_elemento)).toString();
       this.memoria = this.primeiro_elemento + this.operador + "=" + this.resultado;
       this.is_novo_calculo = true;
+    } else if (this.operador == "√" && this.primeiro_elemento !== "") {
+      this.resultado = Math.sqrt(parseInt(this.primeiro_elemento)).toString();
+      this.memoria = "√" + this.primeiro_elemento + "=" + this.resultado;
+      this.is_novo_calculo = true;
+    } else if (this.operador == "%" && this.segundo_elemento != "") {
+    this.resultado = (parseFloat(this.primeiro_elemento) * (parseFloat(this.segundo_elemento) / 100)).toString();
+        this.memoria = this.primeiro_elemento + "%" + this.segundo_elemento + "=" + this.resultado;
+        this.is_novo_calculo = true;
+    
+    
+      
 
     }else {
       if (this.operador == "") {
@@ -106,5 +117,12 @@ export class HomePage {
     this.segundo_elemento = "";
     this.operador = "";
     this.is_novo_calculo = false;
+  }
+  apagarUltimoNumero() {
+    if (this.operador === "") {
+      this.primeiro_elemento = this.primeiro_elemento.slice(0, -1);
+    } else {
+      this.segundo_elemento = this.segundo_elemento.slice(0, -1);
+    }
   }
 }  
