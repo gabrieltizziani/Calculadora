@@ -1,9 +1,12 @@
 <ion-content [fullscreen]="true">
     <ion-grid id="container">
       <h1>{{resultado}}</h1>
+      
+      <div class="apagar"><ion-icon name="backspace-outline" (click)="apagarUltimoNumero()"></ion-icon></div>
+      
       <ion-row>
         <ion-col>
-          <button class="glow-on-hover" color="dark" (click)="operadores('²')">x²</button>
+          <button class="glow-on-hover"  (click)="operadores('²')">x²</button>
         </ion-col>
         <ion-col>
           <button class="glow-on-hover" color="dark" (click)="operadores('√')">√</button>
@@ -14,6 +17,7 @@
         <ion-col>
           <button class="glow-on-hover" color="dark" (click)="operadores('/')">/</button>
         </ion-col>
+        
       </ion-row>
       <ion-row>
         <ion-col>
@@ -68,7 +72,7 @@
           <ion-button class="glow-on-hover" color="warning" (click)="resetar()">C</ion-button>
         </ion-col>
         <ion-col>
-          <button  class="glow-on-hover" color="dark"  (click)="operadores('.')">.</button>
+          <button  class="glow-on-hover" color="dark"  (click)="digitos('.')">.</button>
         </ion-col>
         <ion-col>
           <button  class="glow-on-hover" color="dark"  (click)="calcular()">=</button>
