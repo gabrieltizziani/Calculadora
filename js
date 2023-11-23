@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,18 @@ export class HomePage {
   is_novo_calculo: boolean = false;
 
 
-  constructor() { }
+  constructor(private alertController: AlertController) {}
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Erro!!!',
+      subHeader: 'Não foi possível realizar a operação.',
+      message: 'Verifique o operador ou se o segundo elemento foi definido',
+      buttons: ['Seguir'],
+    });
+
+    await alert.present();
+  }
+  
 
   digitos(valor: string) {
     if (this.is_novo_calculo) {
@@ -64,28 +77,28 @@ export class HomePage {
 
     if (this.operador == "+" && this.segundo_elemento != "") {
       //this.memoria = this.resultado;
-      this.resultado = (parseInt(this.primeiro_elemento) + parseInt(this.segundo_elemento)).toString();
+      this.resultado = (parseFloat(this.primeiro_elemento) + parseFloat(this.segundo_elemento)).toString();
       //this.memoria += "=" + this.resultado;
       this.memoria = this.primeiro_elemento + this.operador + this.segundo_elemento + "=" + this.resultado;
       this.is_novo_calculo = true;
     } else if (this.operador == "-" && this.segundo_elemento != "") {
-      this.resultado = (parseInt(this.primeiro_elemento) - parseInt(this.segundo_elemento)).toString();
+      this.resultado = (parseFloat(this.primeiro_elemento) - parseFloat(this.segundo_elemento)).toString();
       this.memoria = this.primeiro_elemento + this.operador + this.segundo_elemento + "=" + this.resultado;
       this.is_novo_calculo = true;
     } else if (this.operador == "*" && this.segundo_elemento != "") {
-      this.resultado = (parseInt(this.primeiro_elemento) * parseInt(this.segundo_elemento)).toString();
+      this.resultado = (parseFloat(this.primeiro_elemento) * parseFloat(this.segundo_elemento)).toString();
       this.memoria = this.primeiro_elemento + this.operador + this.segundo_elemento + "=" + this.resultado;
       this.is_novo_calculo = true;
     } else if (this.operador == "/" && this.segundo_elemento != "") {
-      this.resultado = (parseInt(this.primeiro_elemento) / parseInt(this.segundo_elemento)).toString();
+      this.resultado = (parseFloat(this.primeiro_elemento) / parseFloat(this.segundo_elemento)).toString();
       this.memoria = this.primeiro_elemento + this.operador + this.segundo_elemento + "=" + this.resultado;
       this.is_novo_calculo = true;
     } else if (this.operador == "²") {
-      this.resultado = (parseInt(this.primeiro_elemento) * parseInt(this.primeiro_elemento)).toString();
+      this.resultado = (parseFloat(this.primeiro_elemento) * parseFloat(this.primeiro_elemento)).toString();
       this.memoria = this.primeiro_elemento + this.operador + "=" + this.resultado;
       this.is_novo_calculo = true;
     } else if (this.operador == "√" && this.primeiro_elemento !== "") {
-      this.resultado = Math.sqrt(parseInt(this.primeiro_elemento)).toString();
+      this.resultado = Math.sqrt(parseFloat(this.primeiro_elemento)).toString();
       this.memoria = "√" + this.primeiro_elemento + "=" + this.resultado;
       this.is_novo_calculo = true;
     } else if (this.operador == "%" && this.segundo_elemento != "") {
@@ -96,13 +109,20 @@ export class HomePage {
     
       
 
+
+
+
+
+
+
     }else {
       if (this.operador == "") {
-        alert("Nenhum operador foi selecionado.")
+        this.presentAlert()
+        
       } /*else if (this.segundo_elemento == "" && this.operador == "") {
         alert("Nenhum elemento foi definido.")
       }*/ else {
-        alert("O segundo elemento não foi definido.")
+        this.presentAlert()
       }
     }
   }
@@ -119,10 +139,21 @@ export class HomePage {
     this.is_novo_calculo = false;
   }
   apagarUltimoNumero() {
-    if (this.operador === "") {
-      this.primeiro_elemento = this.primeiro_elemento.slice(0, -1);
+    let ultimo = this.resultado[this.resultado.length - 1];
+    if (!this.is_segundo_elemento) {
+      this.resultado = this.resultado.slice(0, -1)
+      this.primeiro_elemento = this.resultado
     } else {
-      this.segundo_elemento = this.segundo_elemento.slice(0, -1);
+      if ('+-*/'.includes(ultimo)) {
+        this.resultado = this.resultado.slice(0, -1)
+        this.is_segundo_elemento = false 
+        this.operador_inserido = false
+        this.operador = ""
+
+      } else {
+        this.resultado = this.resultado.slice(0, -1)
+        this.segundo_elemento = this.segundo_elemento.slice(0, -1)
+      }
     }
   }
 }  
